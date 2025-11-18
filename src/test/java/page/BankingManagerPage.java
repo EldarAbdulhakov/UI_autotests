@@ -1,0 +1,143 @@
+package page;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+
+public class BankingManagerPage extends BasePage {
+
+    @FindBy(xpath = "//button[contains(text(), 'Add Customer')]")
+    private WebElement addCustomerMenu;
+
+    @FindBy(xpath = "//input[@placeholder='First Name']")
+    private WebElement firstNameField;
+
+    @FindBy(xpath = "//input[@placeholder='Last Name']")
+    private WebElement lastNameField;
+
+    @FindBy(xpath = "//input[@placeholder='Post Code']")
+    private WebElement postCodeField;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement addCustomerButton;
+
+    @FindBy(xpath = "//button[contains(text(), 'Open Account')]")
+    private WebElement openAccountMenu;
+
+    @FindBy(id = "userSelect")
+    private WebElement userSelect;
+
+    @FindBy(id = "currency")
+    private WebElement currencySelect;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement processButton;
+
+    @FindBy(xpath = "//button[normalize-space()='Customers']")
+    private WebElement customersMenu;
+
+    @FindBy(xpath = "//input[@type='text']")
+    private WebElement SearchCustomerField;
+
+    public BankingManagerPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public BankingManagerPage clickAddCustomerMenu() {
+        getWait5().until(ExpectedConditions.elementToBeClickable((addCustomerMenu))).click();
+
+        return this;
+    }
+
+    public BankingManagerPage enterFirstName(String firstName) {
+        getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
+
+        return this;
+    }
+
+    public BankingManagerPage enterLastName(String lastName) {
+        getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
+
+        return this;
+    }
+
+    public BankingManagerPage enterPostCode(String postCode) {
+        getWait2().until(ExpectedConditions.visibilityOf(postCodeField)).sendKeys(postCode);
+
+        return this;
+    }
+
+    public BankingManagerPage clickAddCustomerButton() {
+        getWait2().until(ExpectedConditions.visibilityOf(addCustomerButton)).click();
+
+        return this;
+    }
+
+    public Alert switchAlert() {
+        return getDriver().switchTo().alert();
+    }
+
+    public BankingManagerPage clickOpenAccountMenu() {
+        getWait2().until(ExpectedConditions.elementToBeClickable(openAccountMenu)).click();
+
+        return this;
+    }
+
+    public BankingManagerPage selectCustomer(String firstAndLastNames) {
+        Select selectCustomer = new Select(getWait5().until(ExpectedConditions.visibilityOf(userSelect)));
+        selectCustomer.selectByVisibleText(firstAndLastNames);
+
+        return this;
+    }
+
+    public BankingManagerPage selectDollarCurrency() {
+        Select selectCustomer = new Select(getWait2().until(ExpectedConditions.visibilityOf(currencySelect)));
+        selectCustomer.selectByValue("Dollar");
+
+        return this;
+    }
+
+    public BankingManagerPage clickProcessButton() {
+        getWait2().until(ExpectedConditions.elementToBeClickable(processButton)).click();
+
+        return this;
+    }
+
+    public BankingManagerPage clickCustomersMenu() {
+        getWait2().until(ExpectedConditions.elementToBeClickable(customersMenu)).click();
+
+        return this;
+    }
+
+    public BankingManagerPage enterSearchCustomer(String firstName) {
+        getWait2().until(ExpectedConditions.visibilityOf(SearchCustomerField)).sendKeys(firstName);
+
+        return this;
+    }
+
+    public BankingManagerPage verifyCustomerFind(String firstName, String lastName) {
+        getWait2().until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]".formatted(firstName, lastName))));
+
+        return this;
+    }
+
+    public BankingManagerPage clickCustomerFindDeleteButton(String firstName, String lastName) {
+        getWait2().until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]//button[text()='Delete']"
+                                .formatted(firstName, lastName))))
+                .click();
+
+        return this;
+    }
+
+    public Boolean isCustomerAbsent(String firstName, String lastName) {
+        return getWait2().until(driver -> getDriver().findElements(
+                By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]"
+                        .formatted(firstName, lastName)))).isEmpty();
+    }
+}

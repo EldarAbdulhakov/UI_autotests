@@ -1,0 +1,143 @@
+package page;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.Random;
+
+public class BankingAccountPage extends BasePage {
+
+    @FindBy(xpath = "//strong[contains(text(), 'Welcome')]")
+    private WebElement welcome;
+
+    @FindBy(xpath = "//div[contains(text(), 'Account Number : ')]//strong[1]")
+    private WebElement accountNumber;
+
+    @FindBy(xpath = "//button[@ng-class='btnClass2']")
+    private WebElement depositMenu;
+
+    @FindBy(xpath = "//input[@placeholder='amount']")
+    private WebElement amountField;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement depositButton;
+
+    @FindBy(xpath = "//span[text()='Deposit Successful']")
+    private WebElement depositSuccessfulMessage;
+
+    @FindBy(xpath = "//button[contains(text(), 'Transactions')]")
+    private WebElement transactions;
+
+    @FindBy(xpath = "//div[contains(., 'Balance :')]/strong[2]")
+    private WebElement balance;
+
+    @FindBy(xpath = "//button[contains(text(), 'Withdrawl')]")
+    private WebElement withdrawlMenu;
+
+    @FindBy(xpath = "//button[@type='submit']")
+    private WebElement withdrawlButton;
+
+    @FindBy(xpath = "//span[normalize-space()='Transaction successful']")
+    private WebElement transactionSuccessfulMessage;
+
+    @FindBy(xpath = "//span[text()='Transaction Failed. You can not withdraw amount more than the balance.']")
+    private WebElement transactionFailedMessage;
+
+    public BankingAccountPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public String getWelcome() {
+        return getWait5().until(ExpectedConditions.visibilityOf(welcome)).getText();
+
+    }
+
+    public String getAccountNumber() {
+        return getWait2().until(ExpectedConditions.visibilityOf(accountNumber)).getText().trim();
+    }
+
+    public BankingAccountPage clickDepositMenu() {
+        getWait2().until(ExpectedConditions.elementToBeClickable(depositMenu)).click();
+
+        return this;
+    }
+
+    public void pause(long time) {
+        Actions actions = new Actions(getDriver());
+        actions.pause(time).perform();
+    }
+
+    public BankingAccountPage waitDepositSuccessfulMessageIsNotDisplayed() {
+        getWait5().until(ExpectedConditions.invisibilityOf(depositSuccessfulMessage));
+
+        return this;
+    }
+
+    public BankingAccountPage enterAmount(String amount) {
+        getWait5().until(ExpectedConditions.visibilityOf(amountField)).sendKeys(amount);
+
+        return this;
+    }
+
+    public BankingAccountPage clickDepositButton() {
+        depositButton.click();
+
+        return this;
+    }
+
+    public BankingAccountPage verifyDepositSuccessfulMessageIsDisplay() {
+        getWait2().until(ExpectedConditions.visibilityOf(depositSuccessfulMessage)).isDisplayed();
+
+        return this;
+    }
+
+    public BankingAccountPage verifyDepositSuccessMessageNotDisplay() {
+        getWait2().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(depositSuccessfulMessage)));
+
+        return this;
+    }
+
+    public BankingListTx clickTransactions() {
+        pause(1200);
+
+        getWait2().until(ExpectedConditions.elementToBeClickable((transactions))).click();
+
+        return new BankingListTx(getDriver());
+    }
+
+    public String getBalance() {
+        return
+                getWait5().until(ExpectedConditions.visibilityOf(balance)).getText();
+    }
+
+    public BankingAccountPage clickWithdrawlMenu() {
+        getWait2().until(ExpectedConditions.elementToBeClickable((withdrawlMenu))).click();
+
+        return this;
+    }
+
+    public String randomAmountWithinBalance(String balance) {
+        return String.valueOf(new Random().nextInt(Integer.parseInt(balance) + 1));
+    }
+
+    public BankingAccountPage clickWithdrawlButton() {
+        getWait2().until(ExpectedConditions.visibilityOf(withdrawlButton)).click();
+
+        return this;
+    }
+
+    public BankingAccountPage verifyTransactionSuccessfulMessageIsDisplay() {
+        getWait5().until(ExpectedConditions.visibilityOf(transactionSuccessfulMessage)).isDisplayed();
+
+        return this;
+    }
+
+    public BankingAccountPage verifyTransactionFailedMessageIsDisplay() {
+        getWait2().until(ExpectedConditions.visibilityOf(transactionFailedMessage)).isDisplayed();
+
+        return this;
+    }
+}
