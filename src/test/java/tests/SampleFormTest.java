@@ -23,7 +23,7 @@ public class SampleFormTest extends BaseTest {
                 .enterPassword(PASSWORD)
                 .checkSports()
                 .selectMaleGender()
-                .enterAboutYourself(ABOUT_YOURSELF)
+                .enterAboutYourselfAndLongestWordFromHobbies(ABOUT_YOURSELF)
                 .clickRegisterButton()
                 .getSuccessRegisterMessage();
 

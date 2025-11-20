@@ -45,61 +45,61 @@ public class SampleFormPage extends BasePage {
     }
 
     public SampleFormPage enterFirstName(String firstName) {
-        getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
 
         return this;
     }
 
     public SampleFormPage enterLastName(String lastName) {
-        getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
 
         return this;
     }
 
     public SampleFormPage enterEmail(String email) {
-        getWait2().until(ExpectedConditions.visibilityOf(emailField)).sendKeys(email);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(emailField)).sendKeys(email);
 
         return this;
     }
 
     public SampleFormPage enterPassword(String password) {
-        getWait2().until(ExpectedConditions.visibilityOf(passwordField)).sendKeys(password);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(passwordField)).sendKeys(password);
 
         return this;
     }
 
     public SampleFormPage checkSports() {
-        getWait2().until(ExpectedConditions.visibilityOf(sportsCheckBox)).click();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(sportsCheckBox)).click();
 
         return this;
     }
 
     public SampleFormPage selectMaleGender() {
-        Select selectGender = new Select(getWait2().until(ExpectedConditions.visibilityOf(genderSelect)));
+        Select selectGender = new Select(waiter.getWait2().until(ExpectedConditions.visibilityOf(genderSelect)));
         selectGender.selectByValue("male");
 
         return this;
     }
 
-    public SampleFormPage enterAboutYourself(String aboutYourself) {
-        getWait2().until(ExpectedConditions.visibilityOf(aboutYourselfField))
+    public SampleFormPage enterAboutYourselfAndLongestWordFromHobbies(String aboutYourself) {
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(aboutYourselfField))
                 .sendKeys(aboutYourself + longestWordFromHobbiesSection());
 
         return this;
     }
 
     public SampleFormPage clickRegisterButton() {
-        getWait2().until(ExpectedConditions.visibilityOf(registerButton)).click();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(registerButton)).click();
 
         return this;
     }
 
     public WebElement getSuccessRegisterMessage() {
-        return getWait2().until(ExpectedConditions.visibilityOf(successRegisterMessage));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(successRegisterMessage));
     }
 
     public String longestWordFromHobbiesSection() {
-        List<WebElement> checkboxes = getWait2().until(ExpectedConditions.visibilityOfAllElements(hobbiesCheckboxes));
+        List<WebElement> checkboxes = waiter.getWait2().until(ExpectedConditions.visibilityOfAllElements(hobbiesCheckboxes));
 
         String longestWord = "";
         for (WebElement checkbox : checkboxes) {

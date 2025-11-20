@@ -30,11 +30,11 @@ public class BankingListTx extends BasePage {
     }
 
     public List<WebElement> getLastTransaction() {
-        return getWait5().until(ExpectedConditions.visibilityOfAllElements(lastTransaction));
+        return waiter.getWait5().until(ExpectedConditions.visibilityOfAllElements(lastTransaction));
     }
 
     public List<WebElement> getAllTransactions() {
-        getWait2().until(ExpectedConditions.visibilityOf(dateTime));
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(dateTime));
 
         return allTransactions;
     }
@@ -61,13 +61,13 @@ public class BankingListTx extends BasePage {
     }
 
     public BankingListTx clickResetButton() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(resetButton)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(resetButton)).click();
 
         return this;
     }
 
     public BankingAccountPage clickBackButton() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(backButton)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(backButton)).click();
 
         return new BankingAccountPage(getDriver());
     }

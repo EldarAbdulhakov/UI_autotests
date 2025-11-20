@@ -19,7 +19,7 @@ public class RegistrationLoginPage extends BasePage {
     @FindBy(xpath = "//input[contains(@id, '_input_username_0')]")
     private WebElement usernameDescription;
 
-    @FindBy(xpath = "//p[text()=\"You're logged in!!\"]")
+    @FindBy(xpath = "//div[@ng-view]/p[1]")
     private WebElement successAuthMessage;
 
     @FindBy(xpath = "//div[@class='alert alert-danger ng-binding ng-scope']")
@@ -34,66 +34,66 @@ public class RegistrationLoginPage extends BasePage {
     }
 
     public Boolean isUsernameFieldDisplayed() {
-        return getWait2().until(ExpectedConditions.visibilityOf(usernameField)).isDisplayed();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameField)).isDisplayed();
     }
 
     public String getUsernameValueAttribute() {
-        return getWait2().until(ExpectedConditions.visibilityOf(usernameField)).getAttribute("value");
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameField)).getAttribute("value");
     }
 
     public String getPasswordValueAttribute() {
-        return getWait2().until(ExpectedConditions.visibilityOf(passwordField)).getAttribute("value");
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(passwordField)).getAttribute("value");
     }
 
     public Boolean isPasswordFieldDisplayed() {
-        return getWait2().until(ExpectedConditions.visibilityOf(passwordField)).isDisplayed();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(passwordField)).isDisplayed();
     }
 
     public Boolean isLoginButtonEnabled() {
-        return getWait2().until(ExpectedConditions.visibilityOf(loginButton)).isEnabled();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(loginButton)).isEnabled();
     }
 
     public RegistrationLoginPage clickLoginButton() {
-        getWait2().until(ExpectedConditions.visibilityOf(loginButton)).click();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(loginButton)).click();
 
         return this;
     }
 
     public Boolean isUsernameDescriptionDisplayed() {
-        return getWait2().until(ExpectedConditions.visibilityOf(usernameDescription)).isDisplayed();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameDescription)).isDisplayed();
     }
 
     public RegistrationLoginPage enterUserName(String username) {
-        getWait2().until(ExpectedConditions.visibilityOf(usernameField)).clear();
-        getWait2().until(ExpectedConditions.visibilityOf(usernameField)).sendKeys(username);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameField)).clear();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameField)).sendKeys(username);
 
         return this;
     }
 
     public RegistrationLoginPage enterPassword(String password) {
-        getWait2().until(ExpectedConditions.visibilityOf(passwordField)).clear();
-        getWait2().until(ExpectedConditions.visibilityOf(passwordField)).sendKeys(password);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(passwordField)).clear();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(passwordField)).sendKeys(password);
 
         return this;
     }
 
     public RegistrationLoginPage enterUserNameDescription(String description) {
-        getWait2().until(ExpectedConditions.visibilityOf(usernameDescription)).clear();
-        getWait2().until(ExpectedConditions.visibilityOf(usernameDescription)).sendKeys(description);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameDescription)).clear();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameDescription)).sendKeys(description);
 
         return this;
     }
 
-    public Boolean isSuccessAuthMessageDisplayed() {
-        return getWait2().until(ExpectedConditions.visibilityOf(successAuthMessage)).isDisplayed();
+    public String getSuccessAuthMessage() {
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(successAuthMessage)).getText();
     }
 
     public String getInvalidAuthMessage() {
-        return getWait2().until(ExpectedConditions.visibilityOf(invalidAuthMessage)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(invalidAuthMessage)).getText();
     }
 
     public RegistrationLoginPage clickLogoutButton() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+        waiter.getWait5().until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
 
         return this;
     }

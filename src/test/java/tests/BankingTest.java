@@ -19,6 +19,37 @@ public class BankingTest extends BaseTest {
     final static String AMOUNT = "100321";
     private String expectedAccountNumber;
 
+    private void addCustomer(String firstName, String lastName, String postCode) {
+        new BankingLoginPage(getDriver())
+                .clickBankManagerLoginButton()
+                .clickAddCustomerMenu()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .enterPostCode(postCode)
+                .clickAddCustomerButton()
+                .switchAlert()
+                .accept();
+    }
+
+    private void openAccount(String firstName, String lastName) {
+        Alert accountCreateAlert = new BankingManagerPage(getDriver())
+                .clickOpenAccountMenu()
+                .selectCustomer(firstName + " " + lastName)
+                .selectDollarCurrency()
+                .clickProcessButton()
+                .switchAlert();
+
+        expectedAccountNumber = accountCreateAlert.getText().split(":")[1].trim();
+
+        accountCreateAlert.accept();
+    }
+
+    private void loginInterfaceAccount(String firstName, String lastName) {
+        new BankingLoginPage(getDriver())
+                .clickCustomerLoginButton()
+                .selectName(firstName + " " + lastName)
+                .clickLoginButton();
+    }
 
     @Test
     public void testAddCustomer() {
@@ -38,7 +69,7 @@ public class BankingTest extends BaseTest {
 
     @Test()
     public void testOpenAccount() {
-        testAddCustomer();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
 
         Alert accountCreateAlert = new BankingManagerPage(getDriver())
                 .clickOpenAccountMenu()
@@ -56,7 +87,9 @@ public class BankingTest extends BaseTest {
 
     @Test
     public void testCustomerLoginInterface() {
-        testOpenAccount();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+
 
         String welcome = new BankingLoginPage(getDriver())
                 .clickCustomerLoginButton()
@@ -73,7 +106,9 @@ public class BankingTest extends BaseTest {
 
     @Test
     public void testSuccessfulDeposit() {
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         List<WebElement> actualAmount = new BankingAccountPage(getDriver())
                 .clickDepositMenu()
@@ -91,7 +126,9 @@ public class BankingTest extends BaseTest {
     public void testUnsuccessfulDeposit() {
         final String AMOUNT = "0";
 
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         List<WebElement> allAmounts = new BankingAccountPage(getDriver())
                 .clickDepositMenu()
@@ -105,7 +142,9 @@ public class BankingTest extends BaseTest {
 
     @Test
     public void testSuccessfulWithdrawal() {
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         BankingAccountPage bankingAccountPage = new BankingAccountPage(getDriver())
                 .clickDepositMenu()
@@ -133,7 +172,9 @@ public class BankingTest extends BaseTest {
     public void testUnsuccessfulWithdrawal() {
         String bigAmount = "1000000";
 
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         List<WebElement> lastAmount = new BankingAccountPage(getDriver())
                 .clickDepositMenu()
@@ -155,7 +196,9 @@ public class BankingTest extends BaseTest {
     public void testBalanceMatchesTransactionHistory() {
         String withdrawalAmount = "100000";
 
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         BankingAccountPage bankingAccountPage = new BankingAccountPage(getDriver());
         String balance = bankingAccountPage
@@ -179,7 +222,9 @@ public class BankingTest extends BaseTest {
 
     @Test
     public void testWithdrawRemainBalanceToZero() {
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         BankingAccountPage bankingAccountPage = new BankingAccountPage(getDriver());
         String balanceAfterDeposit = bankingAccountPage
@@ -202,7 +247,9 @@ public class BankingTest extends BaseTest {
 
     @Test
     public void testClearingTransactionHistory() {
-        testCustomerLoginInterface();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
+        openAccount(FIRST_NAME, LAST_NAME);
+        loginInterfaceAccount(FIRST_NAME, LAST_NAME);
 
         BankingAccountPage bankingAccountPage = new BankingAccountPage(getDriver());
         int transactionCount = bankingAccountPage
@@ -235,7 +282,7 @@ public class BankingTest extends BaseTest {
 
     @Test
     public void testDeleteCustomer() {
-        testAddCustomer();
+        addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
 
         Boolean customerAbsent = new BankingManagerPage(getDriver())
                 .clickCustomersMenu()

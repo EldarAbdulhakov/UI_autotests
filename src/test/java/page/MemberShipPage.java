@@ -15,6 +15,6 @@ public class MemberShipPage extends BasePage {
     }
 
     public String getTitle() {
-        return getWait2().until(ExpectedConditions.visibilityOf(title)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(title)).getText();
     }
 }

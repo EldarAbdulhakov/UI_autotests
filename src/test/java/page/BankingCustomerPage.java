@@ -19,14 +19,14 @@ public class BankingCustomerPage extends BasePage {
     }
 
     public BankingCustomerPage selectName(String firstAndLastNames) {
-        Select selectName = new Select(getWait5().until(ExpectedConditions.visibilityOf(name)));
+        Select selectName = new Select(waiter.getWait5().until(ExpectedConditions.visibilityOf(name)));
         selectName.selectByVisibleText(firstAndLastNames);
 
         return this;
     }
 
     public BankingAccountPage clickLoginButton() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(loginButton)).click();
 
         return new BankingAccountPage(getDriver());
     }

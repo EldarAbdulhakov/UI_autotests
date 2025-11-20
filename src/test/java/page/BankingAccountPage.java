@@ -51,16 +51,16 @@ public class BankingAccountPage extends BasePage {
     }
 
     public String getWelcome() {
-        return getWait5().until(ExpectedConditions.visibilityOf(welcome)).getText();
+        return waiter.getWait5().until(ExpectedConditions.visibilityOf(welcome)).getText();
 
     }
 
     public String getAccountNumber() {
-        return getWait2().until(ExpectedConditions.visibilityOf(accountNumber)).getText().trim();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(accountNumber)).getText().trim();
     }
 
     public BankingAccountPage clickDepositMenu() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(depositMenu)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(depositMenu)).click();
 
         return this;
     }
@@ -71,13 +71,13 @@ public class BankingAccountPage extends BasePage {
     }
 
     public BankingAccountPage waitDepositSuccessfulMessageIsNotDisplayed() {
-        getWait5().until(ExpectedConditions.invisibilityOf(depositSuccessfulMessage));
+        waiter.getWait5().until(ExpectedConditions.invisibilityOf(depositSuccessfulMessage));
 
         return this;
     }
 
     public BankingAccountPage enterAmount(String amount) {
-        getWait5().until(ExpectedConditions.visibilityOf(amountField)).sendKeys(amount);
+        waiter.getWait5().until(ExpectedConditions.visibilityOf(amountField)).sendKeys(amount);
 
         return this;
     }
@@ -89,32 +89,32 @@ public class BankingAccountPage extends BasePage {
     }
 
     public BankingAccountPage verifyDepositSuccessfulMessageIsDisplay() {
-        getWait2().until(ExpectedConditions.visibilityOf(depositSuccessfulMessage)).isDisplayed();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(depositSuccessfulMessage)).isDisplayed();
 
         return this;
     }
 
     public BankingAccountPage verifyDepositSuccessMessageNotDisplay() {
-        getWait2().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(depositSuccessfulMessage)));
+        waiter.getWait2().until(ExpectedConditions.not(ExpectedConditions.visibilityOf(depositSuccessfulMessage)));
 
         return this;
     }
 
     public BankingListTx clickTransactions() {
-        pause(1200);
+        pause(1300);
 
-        getWait2().until(ExpectedConditions.elementToBeClickable((transactions))).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable((transactions))).click();
 
         return new BankingListTx(getDriver());
     }
 
     public String getBalance() {
         return
-                getWait5().until(ExpectedConditions.visibilityOf(balance)).getText();
+                waiter.getWait5().until(ExpectedConditions.visibilityOf(balance)).getText();
     }
 
     public BankingAccountPage clickWithdrawlMenu() {
-        getWait2().until(ExpectedConditions.elementToBeClickable((withdrawlMenu))).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable((withdrawlMenu))).click();
 
         return this;
     }
@@ -124,19 +124,19 @@ public class BankingAccountPage extends BasePage {
     }
 
     public BankingAccountPage clickWithdrawlButton() {
-        getWait2().until(ExpectedConditions.visibilityOf(withdrawlButton)).click();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(withdrawlButton)).click();
 
         return this;
     }
 
     public BankingAccountPage verifyTransactionSuccessfulMessageIsDisplay() {
-        getWait5().until(ExpectedConditions.visibilityOf(transactionSuccessfulMessage)).isDisplayed();
+        waiter.getWait5().until(ExpectedConditions.visibilityOf(transactionSuccessfulMessage)).isDisplayed();
 
         return this;
     }
 
     public BankingAccountPage verifyTransactionFailedMessageIsDisplay() {
-        getWait2().until(ExpectedConditions.visibilityOf(transactionFailedMessage)).isDisplayed();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(transactionFailedMessage)).isDisplayed();
 
         return this;
     }

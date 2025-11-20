@@ -40,39 +40,36 @@ public class BankingManagerPage extends BasePage {
     @FindBy(xpath = "//button[normalize-space()='Customers']")
     private WebElement customersMenu;
 
-    @FindBy(xpath = "//input[@type='text']")
-    private WebElement SearchCustomerField;
-
     public BankingManagerPage(WebDriver driver) {
         super(driver);
     }
 
     public BankingManagerPage clickAddCustomerMenu() {
-        getWait5().until(ExpectedConditions.elementToBeClickable((addCustomerMenu))).click();
+        waiter.getWait5().until(ExpectedConditions.elementToBeClickable((addCustomerMenu))).click();
 
         return this;
     }
 
     public BankingManagerPage enterFirstName(String firstName) {
-        getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
 
         return this;
     }
 
     public BankingManagerPage enterLastName(String lastName) {
-        getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
 
         return this;
     }
 
     public BankingManagerPage enterPostCode(String postCode) {
-        getWait2().until(ExpectedConditions.visibilityOf(postCodeField)).sendKeys(postCode);
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(postCodeField)).sendKeys(postCode);
 
         return this;
     }
 
     public BankingManagerPage clickAddCustomerButton() {
-        getWait2().until(ExpectedConditions.visibilityOf(addCustomerButton)).click();
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(addCustomerButton)).click();
 
         return this;
     }
@@ -82,52 +79,54 @@ public class BankingManagerPage extends BasePage {
     }
 
     public BankingManagerPage clickOpenAccountMenu() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(openAccountMenu)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(openAccountMenu)).click();
 
         return this;
     }
 
     public BankingManagerPage selectCustomer(String firstAndLastNames) {
-        Select selectCustomer = new Select(getWait5().until(ExpectedConditions.visibilityOf(userSelect)));
+        Select selectCustomer = new Select(waiter.getWait5().until(ExpectedConditions.visibilityOf(userSelect)));
         selectCustomer.selectByVisibleText(firstAndLastNames);
 
         return this;
     }
 
     public BankingManagerPage selectDollarCurrency() {
-        Select selectCustomer = new Select(getWait2().until(ExpectedConditions.visibilityOf(currencySelect)));
+        Select selectCustomer = new Select(waiter.getWait2().until(ExpectedConditions.visibilityOf(currencySelect)));
         selectCustomer.selectByValue("Dollar");
 
         return this;
     }
 
     public BankingManagerPage clickProcessButton() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(processButton)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(processButton)).click();
 
         return this;
     }
 
     public BankingManagerPage clickCustomersMenu() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(customersMenu)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(customersMenu)).click();
 
         return this;
     }
 
     public BankingManagerPage enterSearchCustomer(String firstName) {
-        getWait2().until(ExpectedConditions.visibilityOf(SearchCustomerField)).sendKeys(firstName);
+        waiter.getWait2().until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//input[@type='text']")))
+                .sendKeys(firstName);
 
         return this;
     }
 
     public BankingManagerPage verifyCustomerFind(String firstName, String lastName) {
-        getWait2().until(ExpectedConditions.visibilityOfElementLocated(
+        waiter.getWait2().until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]".formatted(firstName, lastName))));
 
         return this;
     }
 
     public BankingManagerPage clickCustomerFindDeleteButton(String firstName, String lastName) {
-        getWait2().until(ExpectedConditions.elementToBeClickable(
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(
                         By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]//button[text()='Delete']"
                                 .formatted(firstName, lastName))))
                 .click();
@@ -136,7 +135,7 @@ public class BankingManagerPage extends BasePage {
     }
 
     public Boolean isCustomerAbsent(String firstName, String lastName) {
-        return getWait2().until(driver -> getDriver().findElements(
+        return waiter.getWait2().until(driver -> getDriver().findElements(
                 By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]"
                         .formatted(firstName, lastName)))).isEmpty();
     }

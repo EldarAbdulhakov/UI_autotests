@@ -38,14 +38,14 @@ public class RegistrationLoginPageTest extends BaseTest {
 
     @Test
     public void testSuccessfulLogin() {
-        Boolean successMessageDisplayed = new RegistrationLoginPage(getDriver())
+        String successMessage = new RegistrationLoginPage(getDriver())
                 .enterUserName(USERNAME)
                 .enterPassword(PASSWORD)
                 .enterUserNameDescription(USERNAME_DESCRIPTION)
                 .clickLoginButton()
-                .isSuccessAuthMessageDisplayed();
+                .getSuccessAuthMessage();
 
-        Assert.assertTrue(successMessageDisplayed);
+        Assert.assertEquals(successMessage, "You're logged in!!");
     }
 
     @Test

@@ -1,5 +1,6 @@
 package page;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,19 +23,19 @@ public class BankingLoginPage extends BasePage {
     }
 
     public SampleFormPage clickSampleFormButton() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(sampleFormButton)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(sampleFormButton)).click();
 
         return new SampleFormPage(getDriver());
     }
 
     public BankingManagerPage clickBankManagerLoginButton() {
-        getWait5().until(ExpectedConditions.elementToBeClickable(bankManagerLoginButton)).click();
+        waiter.getWait5().until(ExpectedConditions.elementToBeClickable(bankManagerLoginButton)).click();
 
         return new BankingManagerPage(getDriver());
     }
 
     public BankingCustomerPage clickCustomerLoginButton() {
-        getWait2().until(ExpectedConditions.elementToBeClickable(customerLoginButton)).click();
+        waiter.getWait2().until(ExpectedConditions.elementToBeClickable(customerLoginButton)).click();
 
         return new BankingCustomerPage(getDriver());
     }

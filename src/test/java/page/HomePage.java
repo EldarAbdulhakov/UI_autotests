@@ -80,83 +80,83 @@ public class HomePage extends BasePage {
     }
 
     public String getHeaderPhone1() {
-        return getWait2().until(ExpectedConditions.visibilityOf(headerPhone1)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerPhone1)).getText();
     }
 
     public String getHeaderPhone2() {
-        return getWait2().until(ExpectedConditions.visibilityOf(headerPhone2)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerPhone2)).getText();
     }
 
     public String getHeaderPhone3() {
-        return getWait2().until(ExpectedConditions.visibilityOf(headerPhone3)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerPhone3)).getText();
     }
 
     public WebElement skypeLinkWebElement() {
-        return getWait2().until(ExpectedConditions.visibilityOf(skypeLinkWebElement));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(skypeLinkWebElement));
     }
 
     public String getHeaderEmail() {
-        return getWait2().until(ExpectedConditions.visibilityOf(headerEmail)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerEmail)).getText();
     }
 
     public WebElement facebookLinkWebElement() {
-        return getWait2().until(ExpectedConditions.visibilityOf(facebookLinkWebElement));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(facebookLinkWebElement));
     }
 
     public WebElement facebookSvg() {
-        return getWait2().until(ExpectedConditions.visibilityOf(facebookSvg));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(facebookSvg));
     }
 
     public WebElement getLinkedinLinkWebElement() {
-        return getWait2().until(ExpectedConditions.visibilityOf(linkedinLinkWebElement));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(linkedinLinkWebElement));
     }
 
     public WebElement getLinkedinSvg() {
-        return getWait2().until(ExpectedConditions.visibilityOf(linkedinSvg));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(linkedinSvg));
     }
 
     public WebElement getGoogleLinkWebElement() {
-        return getWait2().until(ExpectedConditions.visibilityOf(googleLinkWebElement));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(googleLinkWebElement));
     }
 
     public WebElement getGoogleSvg() {
-        return getWait2().until(ExpectedConditions.visibilityOf(googleSvg));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(googleSvg));
     }
 
     public WebElement getYoutubeLinkWebElement() {
-        return getWait2().until(ExpectedConditions.visibilityOf(youtubeLinkWebElement));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(youtubeLinkWebElement));
     }
 
     public WebElement getYoutubeSvg() {
-        return getWait2().until(ExpectedConditions.visibilityOf(youtubeSvg));
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(youtubeSvg));
     }
 
     public String getFooterAddress() {
-        return getWait2().until(ExpectedConditions.visibilityOf(footerAddress))
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerAddress))
                 .getText()
                 .split("\n")[1]
                 .trim();
     }
 
     public String getFooterPhone1() {
-        return getWait2().until(ExpectedConditions.visibilityOf(footerPhone1)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerPhone1)).getText();
     }
 
     public String getFooterPhone2() {
-        return getWait2().until(ExpectedConditions.visibilityOf(footerPhone2)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerPhone2)).getText();
     }
 
     public String getFooterEmail1() {
-        return getWait2().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
     }
 
     public String getFooterEmail2() {
-        return getWait2().until(ExpectedConditions.visibilityOf(footerEmail2)).getText();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerEmail2)).getText();
     }
 
     public HomePage pageDownScroll() {
         new Actions(getDriver())
-                .scrollToElement(getWait2().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
+                .scrollToElement(waiter.getWait2().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
                 .scrollByAmount(0, 100)
                 .perform();
 
@@ -164,12 +164,12 @@ public class HomePage extends BasePage {
     }
 
     public Boolean getDisplayedMenu() {
-        return getWait2().until(ExpectedConditions.visibilityOf(menu)).isDisplayed();
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(menu)).isDisplayed();
     }
 
     public HomePage moveToAllCourses() {
         new Actions(getDriver())
-                .moveToElement(getWait2().until(ExpectedConditions.visibilityOf(allCourses)))
+                .moveToElement(waiter.getWait2().until(ExpectedConditions.visibilityOf(allCourses)))
                 .perform();
 
         return this;
