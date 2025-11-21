@@ -18,6 +18,4 @@ public abstract class BasePage {
     protected WebDriver getDriver() {
         return driver;
     }
-
-
 }

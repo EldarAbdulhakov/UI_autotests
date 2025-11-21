@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -11,6 +12,8 @@ import page.BankingManagerPage;
 
 import java.util.List;
 
+@Epic("Bank Application")
+@Feature("Bank Manager and Customer Operations")
 public class BankingTest extends BaseTest {
 
     final static String FIRST_NAME = "Bob";
@@ -51,6 +54,8 @@ public class BankingTest extends BaseTest {
                 .clickLoginButton();
     }
 
+    @Story("Verify adding a new customer")
+    @Severity(value = SeverityLevel.BLOCKER)
     @Test
     public void testAddCustomer() {
         Alert customerAddAlert = new BankingLoginPage(getDriver())
@@ -67,6 +72,8 @@ public class BankingTest extends BaseTest {
         customerAddAlert.accept();
     }
 
+    @Story("Verify opening a new account for a customer")
+    @Severity(value = SeverityLevel.BLOCKER)
     @Test()
     public void testOpenAccount() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
@@ -85,11 +92,12 @@ public class BankingTest extends BaseTest {
         accountCreateAlert.accept();
     }
 
+    @Story("Verify customer can login and welcome message with correct account number is displayed")
+    @Severity(value = SeverityLevel.BLOCKER)
     @Test
     public void testCustomerLoginInterface() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
         openAccount(FIRST_NAME, LAST_NAME);
-
 
         String welcome = new BankingLoginPage(getDriver())
                 .clickCustomerLoginButton()
@@ -104,6 +112,8 @@ public class BankingTest extends BaseTest {
         Assert.assertEquals(welcome, "Welcome %s %s !!".formatted(FIRST_NAME, LAST_NAME));
     }
 
+    @Story("Verify successful deposit of funds into customer account")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testSuccessfulDeposit() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
@@ -122,6 +132,8 @@ public class BankingTest extends BaseTest {
         Assert.assertEquals(actualAmount.get(1).getText().trim(), "Credit");
     }
 
+    @Story("Verify deposit fails when entering amount zero")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testUnsuccessfulDeposit() {
         final String AMOUNT = "0";
@@ -140,6 +152,8 @@ public class BankingTest extends BaseTest {
         Assert.assertTrue(allAmounts.isEmpty());
     }
 
+    @Story("Verify successful withdrawal of funds within balance limits")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testSuccessfulWithdrawal() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
@@ -168,6 +182,8 @@ public class BankingTest extends BaseTest {
         Assert.assertEquals(lastAmount.get(1).getText().trim(), "Debit");
     }
 
+    @Story("Verify withdrawal fails when amount exceeds available balance")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testUnsuccessfulWithdrawal() {
         String bigAmount = "1000000";
@@ -192,6 +208,8 @@ public class BankingTest extends BaseTest {
         Assert.assertNotEquals(lastAmount.get(0).getText().trim(), bigAmount);
     }
 
+    @Story("Verify account balance matches sum of transactions")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testBalanceMatchesTransactionHistory() {
         String withdrawalAmount = "100000";
@@ -220,6 +238,8 @@ public class BankingTest extends BaseTest {
         Assert.assertEquals(calculateBalance, balance);
     }
 
+    @Story("Verify withdrawing remaining balance sets balance to zero")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testWithdrawRemainBalanceToZero() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
@@ -245,6 +265,8 @@ public class BankingTest extends BaseTest {
         Assert.assertEquals(remainBalance, "0");
     }
 
+    @Story("Verify transaction history can be cleared and balance resets to zero")
+    @Severity(value = SeverityLevel.MINOR)
     @Test
     public void testClearingTransactionHistory() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);
@@ -280,6 +302,8 @@ public class BankingTest extends BaseTest {
         Assert.assertEquals(balance, "0");
     }
 
+    @Story("Verify customer deletion from customers list")
+    @Severity(value = SeverityLevel.MINOR)
     @Test
     public void testDeleteCustomer() {
         addCustomer(FIRST_NAME, LAST_NAME, POST_CODE);

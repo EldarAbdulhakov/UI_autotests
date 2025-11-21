@@ -1,12 +1,17 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.BankingLoginPage;
 
+@Epic("User registration")
+@Feature("Sample Registration Form")
 public class SampleFormTest extends BaseTest {
 
+    @Story("Register a new user through the 'Sample Form' with generated longest word from 'Hobbies' section")
+    @Severity(value = SeverityLevel.BLOCKER)
     @Test
     public void testSuccessfulRegistrationInSampleForm() {
         final String FIRST_NAME = "Petr";

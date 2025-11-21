@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +19,7 @@ public class BankingCustomerPage extends BasePage {
         super(driver);
     }
 
+    @Step("Select name")
     public BankingCustomerPage selectName(String firstAndLastNames) {
         Select selectName = new Select(waiter.getWait5().until(ExpectedConditions.visibilityOf(name)));
         selectName.selectByVisibleText(firstAndLastNames);
@@ -25,6 +27,7 @@ public class BankingCustomerPage extends BasePage {
         return this;
     }
 
+    @Step("Click 'Login' button")
     public BankingAccountPage clickLoginButton() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(loginButton)).click();
 
