@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,16 +30,19 @@ public class BankingListTx extends BasePage {
         super(driver);
     }
 
+    @Step("Get last transaction")
     public List<WebElement> getLastTransaction() {
         return waiter.getWait5().until(ExpectedConditions.visibilityOfAllElements(lastTransaction));
     }
 
+    @Step("Get all transaction")
     public List<WebElement> getAllTransactions() {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(dateTime));
 
         return allTransactions;
     }
 
+    @Step("Calculate balance from transactions")
     public String calculateBalanceFromTransactions() {
         List<WebElement> allTransactions = getAllTransactions();
 
@@ -60,12 +64,14 @@ public class BankingListTx extends BasePage {
         return String.valueOf(balance);
     }
 
+    @Step("Click 'Reset' button")
     public BankingListTx clickResetButton() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(resetButton)).click();
 
         return this;
     }
 
+    @Step("Click 'Back' button")
     public BankingAccountPage clickBackButton() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(backButton)).click();
 

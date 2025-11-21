@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,7 @@ public class MemberShipPage extends BasePage {
         super(driver);
     }
 
+    @Step("Get title")
     public String getTitle() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(title)).getText();
     }

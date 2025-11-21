@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -44,46 +45,54 @@ public class BankingManagerPage extends BasePage {
         super(driver);
     }
 
+    @Step("Click 'Add Customer' menu")
     public BankingManagerPage clickAddCustomerMenu() {
         waiter.getWait5().until(ExpectedConditions.elementToBeClickable((addCustomerMenu))).click();
 
         return this;
     }
 
+    @Step("Enter first name")
     public BankingManagerPage enterFirstName(String firstName) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
 
         return this;
     }
 
+    @Step("Enter last name")
     public BankingManagerPage enterLastName(String lastName) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
 
         return this;
     }
 
+    @Step("Enter post code")
     public BankingManagerPage enterPostCode(String postCode) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(postCodeField)).sendKeys(postCode);
 
         return this;
     }
 
+    @Step("Click 'Add Customer' button")
     public BankingManagerPage clickAddCustomerButton() {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(addCustomerButton)).click();
 
         return this;
     }
 
+    @Step("Switch alert")
     public Alert switchAlert() {
         return getDriver().switchTo().alert();
     }
 
+    @Step("Click 'Open Account' menu")
     public BankingManagerPage clickOpenAccountMenu() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(openAccountMenu)).click();
 
         return this;
     }
 
+    @Step("Select customer")
     public BankingManagerPage selectCustomer(String firstAndLastNames) {
         Select selectCustomer = new Select(waiter.getWait5().until(ExpectedConditions.visibilityOf(userSelect)));
         selectCustomer.selectByVisibleText(firstAndLastNames);
@@ -91,6 +100,7 @@ public class BankingManagerPage extends BasePage {
         return this;
     }
 
+    @Step("Select 'Dollar' currency")
     public BankingManagerPage selectDollarCurrency() {
         Select selectCustomer = new Select(waiter.getWait2().until(ExpectedConditions.visibilityOf(currencySelect)));
         selectCustomer.selectByValue("Dollar");
@@ -98,18 +108,21 @@ public class BankingManagerPage extends BasePage {
         return this;
     }
 
+    @Step("Click 'Process' button")
     public BankingManagerPage clickProcessButton() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(processButton)).click();
 
         return this;
     }
 
+    @Step("Click 'Customers' menu")
     public BankingManagerPage clickCustomersMenu() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(customersMenu)).click();
 
         return this;
     }
 
+    @Step("Enter search customer")
     public BankingManagerPage enterSearchCustomer(String firstName) {
         waiter.getWait2().until(ExpectedConditions.visibilityOfElementLocated(
                         By.xpath("//input[@type='text']")))
@@ -118,6 +131,7 @@ public class BankingManagerPage extends BasePage {
         return this;
     }
 
+    @Step("Verify customer find")
     public BankingManagerPage verifyCustomerFind(String firstName, String lastName) {
         waiter.getWait2().until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]".formatted(firstName, lastName))));
@@ -125,6 +139,7 @@ public class BankingManagerPage extends BasePage {
         return this;
     }
 
+    @Step("Click 'Delete' customer button")
     public BankingManagerPage clickCustomerFindDeleteButton(String firstName, String lastName) {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(
                         By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]//button[text()='Delete']"
@@ -134,6 +149,7 @@ public class BankingManagerPage extends BasePage {
         return this;
     }
 
+    @Step("Is customer absent")
     public Boolean isCustomerAbsent(String firstName, String lastName) {
         return waiter.getWait2().until(driver -> getDriver().findElements(
                 By.xpath("//tr[td[1][text()='%s'] and td[2][text()='%s']]"

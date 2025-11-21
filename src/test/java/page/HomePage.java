@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -79,58 +80,72 @@ public class HomePage extends BasePage {
         driver.get("https://www.way2automation.com/");
     }
 
+    @Step("Get header first phone")
     public String getHeaderPhone1() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerPhone1)).getText();
     }
 
+    @Step("Get header second phone")
     public String getHeaderPhone2() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerPhone2)).getText();
     }
 
+    @Step("Get header third phone")
     public String getHeaderPhone3() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerPhone3)).getText();
     }
 
+    @Step("Skype link web element")
     public WebElement skypeLinkWebElement() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(skypeLinkWebElement));
     }
 
+    @Step("Get header email")
     public String getHeaderEmail() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(headerEmail)).getText();
     }
 
+    @Step("Facebook link web element")
     public WebElement facebookLinkWebElement() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(facebookLinkWebElement));
     }
 
+    @Step("Facebook svg")
     public WebElement facebookSvg() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(facebookSvg));
     }
 
+    @Step("Get Linkedin link web element")
     public WebElement getLinkedinLinkWebElement() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(linkedinLinkWebElement));
     }
 
+    @Step("Get Linkedin svg")
     public WebElement getLinkedinSvg() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(linkedinSvg));
     }
 
+    @Step("Get Google link web element")
     public WebElement getGoogleLinkWebElement() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(googleLinkWebElement));
     }
 
+    @Step("Get Google svg")
     public WebElement getGoogleSvg() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(googleSvg));
     }
 
+    @Step("Get Youtube link web element")
     public WebElement getYoutubeLinkWebElement() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(youtubeLinkWebElement));
     }
 
+    @Step("Get Youtube svg")
     public WebElement getYoutubeSvg() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(youtubeSvg));
     }
 
+    @Step("")
     public String getFooterAddress() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerAddress))
                 .getText()
@@ -138,22 +153,27 @@ public class HomePage extends BasePage {
                 .trim();
     }
 
+    @Step("Get footer first phone")
     public String getFooterPhone1() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerPhone1)).getText();
     }
 
+    @Step("Get footer second phone")
     public String getFooterPhone2() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerPhone2)).getText();
     }
 
+    @Step("Get footer first email")
     public String getFooterEmail1() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
     }
 
+    @Step("Get footer second email")
     public String getFooterEmail2() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerEmail2)).getText();
     }
 
+    @Step("Page down scroll")
     public HomePage pageDownScroll() {
         new Actions(getDriver())
                 .scrollToElement(waiter.getWait2().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
@@ -163,10 +183,12 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("Get displayed menu")
     public Boolean getDisplayedMenu() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(menu)).isDisplayed();
     }
 
+    @Step("Move to 'All Courses'")
     public HomePage moveToAllCourses() {
         new Actions(getDriver())
                 .moveToElement(waiter.getWait2().until(ExpectedConditions.visibilityOf(allCourses)))
@@ -175,6 +197,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("Click 'Lifetime Membership' button")
     public MemberShipPage clickLifetimeMembershipButton() {
         lifetimeMembershipButton.click();
 

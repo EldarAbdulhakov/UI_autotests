@@ -1,12 +1,17 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.HomePage;
 
+@Epic("Main Website Functionality")
+@Feature("Main Page UI Components")
 public class MainPageTest extends BaseTest {
 
+    @Story("Verify first phone number in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderPhone1() {
         String headerPhone = new HomePage(getDriver())
@@ -15,6 +20,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(headerPhone, "+919711-111-558");
     }
 
+    @Story("Verify second phone number in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderPhone2() {
         String headerPhone = new HomePage(getDriver())
@@ -23,6 +30,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(headerPhone, "+919711-191-558");
     }
 
+    @Story("Verify third phone number in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderPhone3() {
         String headerPhone = new HomePage(getDriver())
@@ -31,6 +40,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(headerPhone, "+1 646-480-0603");
     }
 
+    @Story("Verify Skype link and text in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderSkypeLinkAndText() {
         WebElement skypeLink = new HomePage(getDriver())
@@ -40,6 +51,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(skypeLink.getText(), "seleniumcoaching");
     }
 
+    @Story("Verify email link in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderEmail() {
         String email = new HomePage(getDriver())
@@ -48,6 +61,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(email, "trainer@way2automation.com");
     }
 
+    @Story("Verify Facebook link and SVG icon in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderFacebookLinkAndSvg() {
         HomePage homePage = new HomePage(getDriver());
@@ -59,6 +74,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertTrue(facebookSvg.isDisplayed());
     }
 
+    @Story("Verify Linkedin link and SVG icon in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderLinkedinLinkAndSvg() {
         HomePage homePage = new HomePage(getDriver());
@@ -70,6 +87,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertTrue(linkedinSvg.isDisplayed());
     }
 
+    @Story("Verify Google link and SVG icon in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderGoogleLinkAndSvg() {
         HomePage homePage = new HomePage(getDriver());
@@ -81,6 +100,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertTrue(googleSvg.isDisplayed());
     }
 
+    @Story("Verify Youtube link and SVG icon in the header")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testHeaderYoutubeLinkAndSvg() {
         HomePage homePage = new HomePage(getDriver());
@@ -92,6 +113,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertTrue(youtubeSvg.isDisplayed());
     }
 
+    @Story("Verify address in the footer")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testFooterAddress() {
         String footerAddress = new HomePage(getDriver())
@@ -102,6 +125,8 @@ public class MainPageTest extends BaseTest {
                 "CDR Complex, 3rd Floor, Naya Bans Market, Sector 15, Noida, Near sec-16 Metro Station");
     }
 
+    @Story("Verify first phone number in the footer")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testFooterPhone1() {
         String footerPhone1 = new HomePage(getDriver())
@@ -110,6 +135,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(footerPhone1, "+91 97111-11-558");
     }
 
+    @Story("Verify second phone number in the footer")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testFooterPhone2() {
         String footerPhone2 = new HomePage(getDriver())
@@ -118,6 +145,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(footerPhone2, "+91 97111-91-558");
     }
 
+    @Story("Verify first email in the footer")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testFooterEmail1() {
         String footerEmail1 = new HomePage(getDriver())
@@ -126,6 +155,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(footerEmail1, "trainer@way2automation.com");
     }
 
+    @Story("Verify second email in the footer")
+    @Severity(value = SeverityLevel.TRIVIAL)
     @Test
     public void testFooterEmail2() {
         String footerEmail2 = new HomePage(getDriver())
@@ -134,6 +165,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertEquals(footerEmail2, "seleniumcoaching@gmail.com");
     }
 
+    @Story("Verify navigation menu visibility when scrolling down")
+    @Severity(value = SeverityLevel.MINOR)
     @Test
     public void testDisplayMenuOnScrollDown() {
         Boolean menuDisplayed = new HomePage(getDriver())
@@ -143,6 +176,8 @@ public class MainPageTest extends BaseTest {
         Assert.assertTrue(menuDisplayed);
     }
 
+    @Story("Verify navigation to 'Lifetime Membership' page")
+    @Severity(value = SeverityLevel.CRITICAL)
     @Test
     public void testNavigationToLifetimeMembership() {
         String title = new HomePage(getDriver())

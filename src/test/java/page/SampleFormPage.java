@@ -1,5 +1,6 @@
 package page;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,36 +45,42 @@ public class SampleFormPage extends BasePage {
         super(driver);
     }
 
+    @Step("Enter first name")
     public SampleFormPage enterFirstName(String firstName) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
 
         return this;
     }
 
+    @Step("Enter last name")
     public SampleFormPage enterLastName(String lastName) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(lastNameField)).sendKeys(lastName);
 
         return this;
     }
 
+    @Step("Enter email")
     public SampleFormPage enterEmail(String email) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(emailField)).sendKeys(email);
 
         return this;
     }
 
+    @Step("Enter password")
     public SampleFormPage enterPassword(String password) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(passwordField)).sendKeys(password);
 
         return this;
     }
 
+    @Step("Check 'Sports'")
     public SampleFormPage checkSports() {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(sportsCheckBox)).click();
 
         return this;
     }
 
+    @Step("Select 'Male' gender")
     public SampleFormPage selectMaleGender() {
         Select selectGender = new Select(waiter.getWait2().until(ExpectedConditions.visibilityOf(genderSelect)));
         selectGender.selectByValue("male");
@@ -81,6 +88,7 @@ public class SampleFormPage extends BasePage {
         return this;
     }
 
+    @Step("Enter about yourself and longest word from 'Hobbies'")
     public SampleFormPage enterAboutYourselfAndLongestWordFromHobbies(String aboutYourself) {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(aboutYourselfField))
                 .sendKeys(aboutYourself + longestWordFromHobbiesSection());
@@ -88,16 +96,19 @@ public class SampleFormPage extends BasePage {
         return this;
     }
 
+    @Step("Click 'Register' button")
     public SampleFormPage clickRegisterButton() {
         waiter.getWait2().until(ExpectedConditions.visibilityOf(registerButton)).click();
 
         return this;
     }
 
+    @Step("Get success register message")
     public WebElement getSuccessRegisterMessage() {
         return waiter.getWait2().until(ExpectedConditions.visibilityOf(successRegisterMessage));
     }
 
+    @Step("Longest word from 'Hobbies' section")
     public String longestWordFromHobbiesSection() {
         List<WebElement> checkboxes = waiter.getWait2().until(ExpectedConditions.visibilityOfAllElements(hobbiesCheckboxes));
 

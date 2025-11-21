@@ -14,7 +14,6 @@ public abstract class BaseTest {
         return driver;
     }
 
-
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
