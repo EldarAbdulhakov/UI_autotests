@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Authorization Suite">
+    <test name="Authorization Test With Data Provider">
+        <classes>
+            <class name="tests.RegistrationLoginPageTest">
+                <methods>
+                    <include name="testAuthorization"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

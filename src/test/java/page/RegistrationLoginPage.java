@@ -73,7 +73,7 @@ public class RegistrationLoginPage extends BasePage {
 
     @Step("Enter user name")
     public RegistrationLoginPage enterUserName(String username) {
-        waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameField)).clear();
+        waiter.getWait5().until(ExpectedConditions.visibilityOf(usernameField)).clear();
         waiter.getWait2().until(ExpectedConditions.visibilityOf(usernameField)).sendKeys(username);
 
         return this;
@@ -110,5 +110,24 @@ public class RegistrationLoginPage extends BasePage {
         waiter.getWait5().until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
 
         return this;
+    }
+
+    @Step("Get any authorisation message")
+    public String getAnyAuthMessage() {
+        return waiter.getWait5().until(driver -> {
+            try {
+                if (successAuthMessage.isDisplayed()) {
+                    return successAuthMessage.getText();
+                }
+            } catch (Exception ignored) {}
+
+            try {
+                if (invalidAuthMessage.isDisplayed()) {
+                    return invalidAuthMessage.getText();
+                }
+            } catch (Exception ignored) {}
+
+            return null;
+        });
     }
 }
