@@ -1,10 +1,16 @@
 package tests;
 
+import io.qameta.allure.Allure;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import java.io.ByteArrayInputStream;
 
 public abstract class BaseTest {
 
@@ -23,7 +29,11 @@ public abstract class BaseTest {
     }
 
     @AfterMethod
-    protected void closeDriver() {
+    protected void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment("ScreenshotWhenFalling", new ByteArrayInputStream(screenshot));
+        }
         driver.quit();
     }
 }
