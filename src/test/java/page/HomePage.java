@@ -18,7 +18,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@href='tel:+16464800603']")
     private WebElement headerPhone3;
 
-    @FindBy(xpath = "//a[contains(@href, 'skype')]")
+    @FindBy(xpath = "//a[contains(@href, 'skype_WrongSelector')]")
     private WebElement skypeLinkWebElement;
 
     @FindBy(xpath = "//header//a[@href='mailto:trainer@way2automation.com']")
