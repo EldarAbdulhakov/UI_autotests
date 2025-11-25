@@ -2,6 +2,7 @@ package tests;
 
 import io.qameta.allure.*;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import page.RegistrationLoginPage;
 
@@ -13,6 +14,57 @@ public class RegistrationLoginPageTest extends BaseTest {
     final static String PASSWORD = "password";
     final static String INVALID_PASSWORD = "invalid password";
     final static String USERNAME_DESCRIPTION = "username description";
+
+    @DataProvider(name = "authData")
+    public Object[][] authData() {
+        return new Object[][]{
+                {"angular", "password", "use", "You're logged in!!"},
+                {"angular", "wrongPass", "username description", "Username or password is incorrect"},
+                {"wrongUser", "password", "username description", "Username or password is incorrect"},
+                {"angular", "pas", "username description", "Username or password is incorrect"},
+                {"ang", "password", "username description", "Username or password is incorrect"}
+        };
+    }
+
+    @DataProvider(name = "disableLoginButtonData")
+    public Object[][] disableLoginButtonData() {
+        return new Object[][]{
+                {"", "", "username description"},
+                {"", "", ""},
+                {"angular", "", "username description"},
+                {"", "password", "username description"},
+                {"angular", "password", ""},
+                {"angular", "password", "u"},
+                {"angular", "password", "us"},
+                {"angular", "p", "username description"},
+                {"angular", "pa", "username description"},
+                {"a", "password", "username description"},
+                {"an", "password", "username description"}
+        };
+    }
+
+    @Test(dataProvider = "authData")
+    public void testAuthorization(String username, String password, String usernameDescription, String expectedMassage) {
+        String authMessage = new RegistrationLoginPage(getDriver())
+                .enterUserName(username)
+                .enterPassword(password)
+                .enterUserNameDescription(usernameDescription)
+                .clickLoginButton()
+                .getAnyAuthMessage();
+
+        Assert.assertEquals(authMessage, expectedMassage);
+    }
+
+    @Test(dataProvider = "disableLoginButtonData")
+    public void testLoginButtonDisabledWhenInvalidInput(String username, String password, String usernameDescription) {
+        Boolean isLoginButtonEnabled = new RegistrationLoginPage(getDriver())
+                .enterUserName(username)
+                .enterPassword(password)
+                .enterUserNameDescription(usernameDescription)
+                .isLoginButtonEnabled();
+
+        Assert.assertFalse(isLoginButtonEnabled, "Login button is enabled");
+    }
 
     @Story("Verify Username field")
     @Severity(value = SeverityLevel.BLOCKER)
