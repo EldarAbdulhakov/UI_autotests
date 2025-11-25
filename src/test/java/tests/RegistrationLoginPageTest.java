@@ -16,44 +16,54 @@ public class RegistrationLoginPageTest extends BaseTest {
     final static String USERNAME_DESCRIPTION = "username description";
 
     @DataProvider(name = "authData")
-    public Object[][] provideAuthData() {
+    public Object[][] authData() {
         return new Object[][]{
                 {"angular", "password", "use", "You're logged in!!"},
                 {"angular", "wrongPass", "username description", "Username or password is incorrect"},
                 {"wrongUser", "password", "username description", "Username or password is incorrect"},
-                {"", "", "username description", "emptyFields"},
-                {"", "", "", "emptyFields"},
-                {"angular", "", "username description", "emptyFields"},
-                {"", "password", "username description", "emptyFields"},
-                {"angular", "password", "", "emptyFields"},
-                {"angular", "password", "u", "less than 3 characters"},
-                {"angular", "password", "us", "less than 3 characters"},
-                {"angular", "p", "username description", "less than 3 characters"},
-                {"angular", "pa", "username description", "less than 3 characters"},
                 {"angular", "pas", "username description", "Username or password is incorrect"},
-                {"a", "password", "username description", "less than 3 characters"},
-                {"an", "password", "username description", "less than 3 characters"},
                 {"ang", "password", "username description", "Username or password is incorrect"}
+        };
+    }
+
+    @DataProvider(name = "disableLoginButtonData")
+    public Object[][] disableLoginButtonData() {
+        return new Object[][]{
+                {"", "", "username description"},
+                {"", "", ""},
+                {"angular", "", "username description"},
+                {"", "password", "username description"},
+                {"angular", "password", ""},
+                {"angular", "password", "u"},
+                {"angular", "password", "us"},
+                {"angular", "p", "username description"},
+                {"angular", "pa", "username description"},
+                {"a", "password", "username description"},
+                {"an", "password", "username description"}
         };
     }
 
     @Test(dataProvider = "authData")
     public void testAuthorization(String username, String password, String usernameDescription, String expectedMassage) {
-        RegistrationLoginPage registrationLoginPage = new RegistrationLoginPage(getDriver())
+        String authMessage = new RegistrationLoginPage(getDriver())
                 .enterUserName(username)
                 .enterPassword(password)
-                .enterUserNameDescription(usernameDescription);
-
-        if (expectedMassage.equals("emptyFields") || expectedMassage.equals("less than 3 characters")) {
-            Assert.assertFalse(registrationLoginPage.isLoginButtonEnabled(), "Login button is enabled");
-            return;
-        }
-
-        String authMessage = registrationLoginPage
+                .enterUserNameDescription(usernameDescription)
                 .clickLoginButton()
                 .getAnyAuthMessage();
 
         Assert.assertEquals(authMessage, expectedMassage);
+    }
+
+    @Test(dataProvider = "disableLoginButtonData")
+    public void testLoginButtonDisabledWhenInvalidInput(String username, String password, String usernameDescription) {
+        Boolean isLoginButtonEnabled = new RegistrationLoginPage(getDriver())
+                .enterUserName(username)
+                .enterPassword(password)
+                .enterUserNameDescription(usernameDescription)
+                .isLoginButtonEnabled();
+
+        Assert.assertFalse(isLoginButtonEnabled, "Login button is enabled");
     }
 
     @Story("Verify Username field")
