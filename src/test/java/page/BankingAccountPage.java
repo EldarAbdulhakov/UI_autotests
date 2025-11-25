@@ -112,7 +112,7 @@ public class BankingAccountPage extends BasePage {
 
     @Step("Click 'Transactions'")
     public BankingListTx clickTransactions() {
-        pause(1300);
+        pause(1500);
 
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable((transactions))).click();
 
