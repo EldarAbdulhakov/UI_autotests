@@ -3,6 +3,7 @@
     <test name="Functional Tests">
         <classes>
             <class name="tests.RegistrationLoginPageTest"/>
+            <class name="tests.BankingTest"/>
             <class name="tests.MainPageTest"/>
         </classes>
     </test>
