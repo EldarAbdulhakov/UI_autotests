@@ -8,7 +8,7 @@
     </test>
 
     <listeners>
-        <listener class-name="utils.retry.RetryListener" />
+        <listener class-name="utils.retry.RetryListener"/>
     </listeners>
 
 </suite>

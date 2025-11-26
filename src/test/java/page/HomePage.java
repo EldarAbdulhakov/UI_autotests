@@ -165,7 +165,7 @@ public class HomePage extends BasePage {
 
     @Step("Get footer first email")
     public String getFooterEmail1() {
-        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
+        return waiter.getWait5().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
     }
 
     @Step("Get footer second email")
@@ -176,7 +176,7 @@ public class HomePage extends BasePage {
     @Step("Page down scroll")
     public HomePage pageDownScroll() {
         new Actions(getDriver())
-                .scrollToElement(waiter.getWait2().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
+                .scrollToElement(waiter.getWait5().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
                 .scrollByAmount(0, 100)
                 .perform();
 
