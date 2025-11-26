@@ -16,7 +16,7 @@ import java.net.URL;
 
 public abstract class BaseTest {
 
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     protected WebDriver getDriver() {
         return driver.get();
