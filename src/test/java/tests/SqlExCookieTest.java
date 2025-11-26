@@ -8,7 +8,7 @@ import utils.CookieUtils;
 public class SqlExCookieTest extends BaseTest {
 
     @Test
-    public void testExperiments1() {
+    public void testLoginWithCookies() {
         final String LOGIN = "eldar55";
         final String PASSWORD = "UzF3kyUd@4j8x6V";
 
