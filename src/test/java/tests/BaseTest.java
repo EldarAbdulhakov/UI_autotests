@@ -34,8 +34,10 @@ public abstract class BaseTest {
     @AfterMethod
     protected void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            WebDriver webDriver = driver.get();
+            byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
             Allure.addAttachment("ScreenshotWhenFalling", new ByteArrayInputStream(screenshot));
+            webDriver.quit();
         }
         driver.get().quit();
         driver.remove();
