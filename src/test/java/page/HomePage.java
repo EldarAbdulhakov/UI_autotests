@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@href='https://wa.me/+919711111558']")
     private WebElement headerPhone1;
 
-    @FindBy(xpath = "//a[@href='https://wa.me/+919711191558']")
+    @FindBy(xpath = "//a[@href='https://wa.me/+919711191558WrongSelector']")
     private WebElement headerPhone2;
 
     @FindBy(xpath = "//a[@href='tel:+16464800603']")

@@ -37,7 +37,7 @@ public class BankingListTx extends BasePage {
 
     @Step("Get all transaction")
     public List<WebElement> getAllTransactions() {
-        waiter.getWait2().until(ExpectedConditions.visibilityOf(dateTime));
+        waiter.getWait5().until(ExpectedConditions.visibilityOf(dateTime));
 
         return allTransactions;
     }
