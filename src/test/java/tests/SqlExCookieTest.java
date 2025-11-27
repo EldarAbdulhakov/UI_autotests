@@ -4,13 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.SqlExPage;
 import utils.CookieUtils;
+import utils.PropertyProvider;
 
 public class SqlExCookieTest extends BaseTest {
 
     @Test
     public void testLoginWithCookies() {
-        final String LOGIN = "eldar55";
-        final String PASSWORD = "UzF3kyUd@4j8x6V";
+        final String LOGIN = PropertyProvider.getInstance().getProperty("sql-ex.login");
+        final String PASSWORD = PropertyProvider.getInstance().getProperty("sql-ex.password");
 
         SqlExPage page = new SqlExPage(getDriver());
 

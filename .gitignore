@@ -1,5 +1,4 @@
 target/
-cookies.dat
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -7,6 +6,8 @@ cookies.dat
 ### IntelliJ IDEA ###
 .idea/
 .gitignore
+**/cookies.dat
+**/credentials.local.properties
 *.iws
 *.iml
 *.ipr
