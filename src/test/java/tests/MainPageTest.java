@@ -27,7 +27,7 @@ public class MainPageTest extends BaseTest {
         String headerPhone = new HomePage(getDriver())
                 .getHeaderPhone2();
 
-        Assert.assertEquals(headerPhone, "+919711-191-558-WrongPhone");
+        Assert.assertEquals(headerPhone, "+919711-191-558");
     }
 
     @Story("Verify third phone number in the header")
