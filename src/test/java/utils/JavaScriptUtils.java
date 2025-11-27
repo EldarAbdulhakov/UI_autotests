@@ -13,19 +13,19 @@ public class JavaScriptUtils {
         this.js = (JavascriptExecutor) driver;
     }
 
-    @Step("Remove focus from element")
+    @Step("Remove focus from element using Javascript Executor")
     public void removeFocusJS(WebElement element) {
         js.executeScript("arguments[0].blur();", element);
     }
 
-    @Step("Check for vertical scrolling")
+    @Step("Check for vertical scrolling using Javascript Executor")
     public boolean isVerticalScrollJS() {
 
         return (Boolean) js.executeScript(
                 "return document.documentElement.scrollHeight > document.documentElement.clientHeight;");
     }
 
-    @Step("Check for horizontal scrolling")
+    @Step("Check for horizontal scrolling using Javascript Executor")
     public boolean isHorizontalScrollJS() {
 
         return (Boolean) js.executeScript(
