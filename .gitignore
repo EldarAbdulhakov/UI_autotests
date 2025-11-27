@@ -6,6 +6,8 @@ target/
 ### IntelliJ IDEA ###
 .idea/
 .gitignore
+**/cookies.dat
+**/credentials.local.properties
 *.iws
 *.iml
 *.ipr
