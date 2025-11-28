@@ -2,8 +2,13 @@
 <suite name="SequentialSuite" parallel="classes" thread-count="2">
     <test name="Functional Tests">
         <classes>
-            <class name="tests.BankingTest"/>
+            <class name="tests.RegistrationLoginPageTest"/>
             <class name="tests.MainPageTest"/>
         </classes>
     </test>
+
+    <listeners>
+        <listener class-name="utils.retry.RetryListener"/>
+    </listeners>
+
 </suite>

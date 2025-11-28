@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//a[@href='https://wa.me/+919711111558']")
     private WebElement headerPhone1;
 
-    @FindBy(xpath = "//a[@href='https://wa.me/+919711191558']")
+    @FindBy(xpath = "//a[@href='https://wa.me/+919711191558WrongSelector']")
     private WebElement headerPhone2;
 
     @FindBy(xpath = "//a[@href='tel:+16464800603']")
@@ -165,7 +165,7 @@ public class HomePage extends BasePage {
 
     @Step("Get footer first email")
     public String getFooterEmail1() {
-        return waiter.getWait2().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
+        return waiter.getWait5().until(ExpectedConditions.visibilityOf(footerEmail1)).getText();
     }
 
     @Step("Get footer second email")
@@ -176,7 +176,7 @@ public class HomePage extends BasePage {
     @Step("Page down scroll")
     public HomePage pageDownScroll() {
         new Actions(getDriver())
-                .scrollToElement(waiter.getWait2().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
+                .scrollToElement(waiter.getWait5().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
                 .scrollByAmount(0, 100)
                 .perform();
 

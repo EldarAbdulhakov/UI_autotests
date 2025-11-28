@@ -39,6 +39,7 @@ public abstract class BaseTest {
             Allure.addAttachment("ScreenshotWhenFalling", new ByteArrayInputStream(screenshot));
             webDriver.quit();
         }
+
         driver.get().quit();
         driver.remove();
     }

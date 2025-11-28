@@ -127,6 +127,7 @@ public class BankingAccountPage extends BasePage {
 
     @Step("Click 'Withdrawl' menu")
     public BankingAccountPage clickWithdrawlMenu() {
+        pause(1000);
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable((withdrawlMenu))).click();
 
         return this;
