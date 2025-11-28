@@ -83,7 +83,6 @@ public class DriverFactory {
                 FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxOptions);
                 firefoxDriver.manage().window().setSize(new Dimension(1920, 1080));
 
-
                 return firefoxDriver;
 
             case "edge":

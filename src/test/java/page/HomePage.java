@@ -1,7 +1,6 @@
 package page;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -176,12 +175,10 @@ public class HomePage extends BasePage {
 
     @Step("Page down scroll")
     public HomePage pageDownScroll() {
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", allRightsAreReserved);
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0, 100);");
-//        new Actions(getDriver())
-//                .scrollToElement(waiter.getWait5().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
-//                .scrollByAmount(0, 100)
-//                .perform();
+        new Actions(getDriver())
+                .scrollToElement(waiter.getWait5().until(ExpectedConditions.visibilityOf(allRightsAreReserved)))
+                .scrollByAmount(0, 100)
+                .perform();
 
         return this;
     }
