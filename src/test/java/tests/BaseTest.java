@@ -4,15 +4,14 @@ import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import utils.DriverFactory;
 
 import java.io.ByteArrayInputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public abstract class BaseTest {
 
@@ -22,13 +21,12 @@ public abstract class BaseTest {
         return driver.get();
     }
 
+    @Parameters({"browserName", "useGrid"})
     @BeforeMethod
-    public void setUp() throws MalformedURLException {
-        ChromeOptions options = new ChromeOptions();
-        URL gridUrl = new URL("http://localhost:4444/wd/hub");
-        options.addArguments("--window-size=1920,1080");
-
-        driver.set(new RemoteWebDriver(gridUrl, options));
+    public void setUp(@Optional("chrome") String browserName,
+                      @Optional("false") boolean useGrid) {
+        WebDriver webDriver = DriverFactory.createDriver(browserName, useGrid);
+        driver.set(webDriver);
     }
 
     @AfterMethod
@@ -37,7 +35,6 @@ public abstract class BaseTest {
             WebDriver webDriver = driver.get();
             byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
             Allure.addAttachment("ScreenshotWhenFalling", new ByteArrayInputStream(screenshot));
-            webDriver.quit();
         }
 
         driver.get().quit();
