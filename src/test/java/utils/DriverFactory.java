@@ -1,7 +1,6 @@
 package utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,12 +8,12 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
 
@@ -44,7 +43,9 @@ public class DriverFactory {
 
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--window-size=1920,1080");
+
+                firefoxOptions.addArguments("--width=1920");
+                firefoxOptions.addArguments("--height=1080");
 
                 return new RemoteWebDriver(gridUrl, firefoxOptions);
 
@@ -55,11 +56,19 @@ public class DriverFactory {
                 return new RemoteWebDriver(gridUrl, edgeOptions);
 
             case "ie":
-                InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
-                internetExplorerOptions.ignoreZoomSettings();
-                internetExplorerOptions.introduceFlakinessByIgnoringSecurityDomains();
+                EdgeOptions ieOptions = new EdgeOptions();
 
-                return new RemoteWebDriver(gridUrl, internetExplorerOptions);
+                ieOptions.addArguments("--window-size=1920,1080");
+
+                Map<String, Object> ieModeOptions = new HashMap<>();
+                ieModeOptions.put("ie.edgechromium", true);
+                ieModeOptions.put("ie.mode", "ieEnterprise");
+                ieModeOptions.put("ie.requireWindowFocus", false);
+                ieModeOptions.put("ie.ignoreZoomSetting", true);
+
+                ieOptions.setCapability("se:ieOptions", ieModeOptions);
+
+                return new RemoteWebDriver(gridUrl, ieOptions);
 
             default:
                 throw new IllegalArgumentException("Unknown browser: " + browserName);
@@ -80,10 +89,8 @@ public class DriverFactory {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.addArguments("--width=1920");
                 firefoxOptions.addArguments("--height=1080");
-                FirefoxDriver firefoxDriver = new FirefoxDriver(firefoxOptions);
-                firefoxDriver.manage().window().setSize(new Dimension(1920, 1080));
 
-                return firefoxDriver;
+                return new FirefoxDriver(firefoxOptions);
 
             case "edge":
                 WebDriverManager.edgedriver().setup();
@@ -93,12 +100,19 @@ public class DriverFactory {
                 return new EdgeDriver(edgeOptions);
 
             case "ie":
-                WebDriverManager.iedriver().setup();
-                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-                ieOptions.ignoreZoomSettings();
-                ieOptions.introduceFlakinessByIgnoringSecurityDomains();
+                WebDriverManager.edgedriver().setup();
+                EdgeOptions ieOptions = new EdgeOptions();
+                ieOptions.addArguments("--window-size=1920,1080");
 
-                return new InternetExplorerDriver(ieOptions);
+                Map<String, Object> ieModeOptions = new HashMap<>();
+                ieModeOptions.put("ie.edgechromium", true);
+                ieModeOptions.put("ie.mode", "ieEnterprise");
+                ieModeOptions.put("ie.requireWindowFocus", false);
+                ieModeOptions.put("ie.ignoreZoomSetting", true);
+
+                ieOptions.setCapability("se:ieOptions", ieModeOptions);
+
+                return new EdgeDriver(ieOptions);
 
             default:
                 throw new IllegalArgumentException("Unknown local browser: " + browserName);

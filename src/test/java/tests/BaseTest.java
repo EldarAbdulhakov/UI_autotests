@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import utils.DriverFactory;
 
@@ -22,7 +23,8 @@ public abstract class BaseTest {
 
     @Parameters({"browserName", "useGrid"})
     @BeforeMethod
-    public void setUp(String browserName, boolean useGrid) {
+    public void setUp(@Optional("chrome") String browserName,
+                      @Optional("false") boolean useGrid) {
         WebDriver webDriver = DriverFactory.createDriver(browserName, useGrid);
         driver.set(webDriver);
     }
