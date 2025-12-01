@@ -14,35 +14,32 @@ public class DroppablePage extends BasePage {
     }
 
     @FindBy(xpath = "//p[text()='Drag me to my target']")
-    private WebElement dragMe;
-
-    @FindBy(xpath = "//p[text()='Drop here']")
-    private WebElement dropHere;
+    private WebElement draggable;
 
     @FindBy(xpath = "//iframe[@src='droppable/default.html']")
-    private WebElement defaultIframe;
+    private WebElement droppableFrame;
 
-    @FindBy(xpath = "//div[@class='ui-widget-header ui-droppable ui-state-highlight']")
-    private WebElement droppedHere;
+    @FindBy(id = "droppable")
+    private WebElement droppable;
 
     public DroppablePage switchToDroppableFrame() {
-        waiter.getWait2().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(defaultIframe));
+        waiter.getWait2().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(droppableFrame));
 
         return this;
     }
 
     public DroppablePage dragAndDrop() {
-        waiter.getWait2().until(ExpectedConditions.visibilityOf(dragMe));
-        waiter.getWait2().until(ExpectedConditions.visibilityOf(dropHere));
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(draggable));
+        waiter.getWait2().until(ExpectedConditions.visibilityOf(droppable));
 
         Actions actions = new Actions(getDriver());
-        actions.dragAndDrop(dragMe, dropHere)
+        actions.dragAndDrop(draggable, droppable)
                 .perform();
 
         return this;
     }
 
-    public String getDroppedHere() {
-        return droppedHere.getText();
+    public String getDroppable() {
+        return droppable.getText();
     }
 }

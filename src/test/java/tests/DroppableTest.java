@@ -8,11 +8,17 @@ public class DroppableTest extends BaseTest {
 
     @Test
     public void testDragAndDrop() {
-        String droppedHereText = new DroppablePage(getDriver())
-                .switchToDroppableFrame()
-                .dragAndDrop()
-                .getDroppedHere();
+        DroppablePage droppablePage = new DroppablePage(getDriver());
 
-        Assert.assertEquals(droppedHereText, "Dropped!");
+        String beforeDroppableText = droppablePage
+                .switchToDroppableFrame()
+                .getDroppable();
+
+        String afterDroppableText = droppablePage
+                .dragAndDrop()
+                .getDroppable();
+
+        Assert.assertEquals(beforeDroppableText, "Drop here");
+        Assert.assertEquals(afterDroppableText, "Dropped!");
     }
 }
