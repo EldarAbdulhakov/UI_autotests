@@ -7,7 +7,7 @@ import page.FramesAndWindowsPage;
 public class NewTabsTest extends BaseTest {
 
     @Test
-    public void test() {
+    public void testOpenTabs() {
         int numberOfOpenTabs = new FramesAndWindowsPage(getDriver())
                 .switchToNewBrowserTabLinkFrame()
                 .clickNewBrowserTabLink()
