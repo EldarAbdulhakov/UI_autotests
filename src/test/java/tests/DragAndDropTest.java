@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.DroppablePage;
 
-public class DroppableTest extends BaseTest {
+public class DragAndDropTest extends BaseTest {
 
     @Test
     public void testDragAndDrop() {
