@@ -1,16 +1,23 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.AlertPage;
 
 public class AlertTest extends BaseTest {
 
     @Test
-    public void test() throws InterruptedException {
-        new AlertPage(getDriver())
-                .clickInputAlert()
-                .clickDemonstrateInputBoxButton();
+    public void testEnterTextToAlert() {
+        final String alertFieldText = "Vincent van Gogh";
 
-        Thread.sleep(2000);
+        String inputBoxText = new AlertPage(getDriver())
+                .clickInputAlert()
+                .switchToInputBoxFrame()
+                .clickInputBoxButton()
+                .switchToAlert()
+                .enterTextToAlertAndAccept(alertFieldText)
+                .getInputBox();
+
+        Assert.assertEquals(inputBoxText, "Hello %s! How are you today?".formatted(alertFieldText));
     }
 }
