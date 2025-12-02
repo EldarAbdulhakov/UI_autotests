@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.HTTPGalleryPage;
 import utils.PropertyProvider;
@@ -7,13 +8,15 @@ import utils.PropertyProvider;
 public class BasicAuthTest extends BaseTest {
 
     @Test
-    public void testBasicAuth() throws InterruptedException {
+    public void testBasicAuth() {
         final String LOGIN = PropertyProvider.getInstance().getProperty("httpwatch.login");
         final String PASSWORD = PropertyProvider.getInstance().getProperty("httpwatch.password");
 
-        new HTTPGalleryPage(getDriver())
+        Boolean isAuthImageDisplayed = new HTTPGalleryPage(getDriver())
+                .setBasicAuthCredentials(LOGIN, PASSWORD)
                 .clickDisplayImageButton()
-                .switchToAuthAlert()
-                .enterLoginAndPasswordToAlertAndAccept(LOGIN, PASSWORD);
+                .isImageDisplayed();
+
+        Assert.assertTrue(isAuthImageDisplayed, "Authorization failed");
     }
 }

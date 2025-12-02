@@ -1,28 +1,22 @@
 package page;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.HasAuthentication;
+import org.openqa.selenium.UsernameAndPassword;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class HTTPGalleryPage extends BasePage {
+import java.net.URI;
+import java.util.function.Predicate;
 
-    private Alert alert;
+public class HTTPGalleryPage extends BasePage {
 
     @FindBy(id = "displayImage")
     private WebElement displayImageButton;
-//
-//    @FindBy(xpath = "")
-//    private WebElement ;
-//
-//    @FindBy(xpath = "")
-//    private WebElement ;
-//
-//    @FindBy(xpath = "")
-//    private WebElement ;
+
+    @FindBy(id = "downloadImg")
+    private WebElement image;
 
     public HTTPGalleryPage(WebDriver driver) {
         super(driver);
@@ -35,19 +29,15 @@ public class HTTPGalleryPage extends BasePage {
         return this;
     }
 
-    public HTTPGalleryPage switchToAuthAlert() {
-        alert = waiter.getWait5().until(ExpectedConditions.alertIsPresent());
+    public HTTPGalleryPage setBasicAuthCredentials(String login, String password) {
+        Predicate<URI> uriPredicate = uri -> uri.getHost().contains("httpwatch.com");
+        HasAuthentication driverAuth = (HasAuthentication) getDriver();
+        driverAuth.register(uriPredicate, UsernameAndPassword.of(login, password));
 
         return this;
     }
 
-    public HTTPGalleryPage enterLoginAndPasswordToAlertAndAccept(String login, String password) throws InterruptedException {
-
-        DevTools devTools = getDriver().;
-        devTools.createSession();
-
-        Thread.sleep(2000);
-
-        return this;
+    public Boolean isImageDisplayed() {
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(image)).isDisplayed();
     }
 }
