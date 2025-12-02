@@ -6,3 +6,8 @@
 
         sql-ex.login=<>
         sql-ex.password=<>
+- Для теста сайта https://www.httpwatch.com/httpgallery/authentication/#showExample9 вставьте 
+в файл credentials.local.properties логин и пароль в переменные:
+        
+        httpwatch.login=<>
+        httpwatch.password=<>
