@@ -15,7 +15,7 @@ public class BasicAuthTest extends BaseTest {
         Boolean isAuthImageDisplayed = new HTTPGalleryPage(getDriver())
                 .setBasicAuthCredentials(LOGIN, PASSWORD)
                 .clickDisplayImageButton()
-                .isImageDisplayed();
+                .isAuthImageDisplayed();
 
         Assert.assertTrue(isAuthImageDisplayed, "Authorization failed");
     }

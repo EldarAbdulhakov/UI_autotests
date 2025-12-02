@@ -16,7 +16,7 @@ public class HTTPGalleryPage extends BasePage {
     private WebElement displayImageButton;
 
     @FindBy(id = "downloadImg")
-    private WebElement image;
+    private WebElement authImage;
 
     public HTTPGalleryPage(WebDriver driver) {
         super(driver);
@@ -37,7 +37,7 @@ public class HTTPGalleryPage extends BasePage {
         return this;
     }
 
-    public Boolean isImageDisplayed() {
-        return waiter.getWait2().until(ExpectedConditions.visibilityOf(image)).isDisplayed();
+    public Boolean isAuthImageDisplayed() {
+        return waiter.getWait2().until(ExpectedConditions.visibilityOf(authImage)).isDisplayed();
     }
 }
