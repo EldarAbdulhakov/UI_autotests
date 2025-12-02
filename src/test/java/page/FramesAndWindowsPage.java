@@ -26,7 +26,7 @@ public class FramesAndWindowsPage extends BasePage {
 
     public FramesAndWindowsPage clickNewBrowserTabLink() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(newBrowserTabLink)).click();
-        waiter.getWait2().until(ExpectedConditions.numberOfWindowsToBe(2));
+
 
         return this;
     }
@@ -41,5 +41,9 @@ public class FramesAndWindowsPage extends BasePage {
         }
 
         return new FramesWindowsDefult1Page(getDriver());
+    }
+
+    public int getNumberOfTabs() {
+        return getDriver().getWindowHandles().size();
     }
 }

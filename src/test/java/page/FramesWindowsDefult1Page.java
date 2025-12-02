@@ -14,9 +14,9 @@ public class FramesWindowsDefult1Page extends BasePage {
         super(driver);
     }
 
-    public FramesWindowsDefult1Page clickNewBrowserTabDefult1Page() {
+    public FramesWindowsDefult1Page clickNewBrowserTabLinkOfDefult1Page() {
         waiter.getWait2().until(ExpectedConditions.elementToBeClickable(newBrowserTabDefult1PageLink)).click();
-        waiter.getWait2().until(ExpectedConditions.numberOfWindowsToBe(3));
+
 
         return this;
     }

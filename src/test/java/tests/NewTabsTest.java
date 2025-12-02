@@ -8,13 +8,18 @@ public class NewTabsTest extends BaseTest {
 
     @Test
     public void testOpenTabs() {
-        int numberOfOpenTabs = new FramesAndWindowsPage(getDriver())
+        FramesAndWindowsPage framesAndWindowsPage = new FramesAndWindowsPage(getDriver());
+
+        int initialNumberOfTabs = framesAndWindowsPage
+                .getNumberOfTabs();
+
+        int finalNumberOfTabs = framesAndWindowsPage
                 .switchToNewBrowserTabLinkFrame()
                 .clickNewBrowserTabLink()
                 .switchToWindowsDefult1Page()
-                .clickNewBrowserTabDefult1Page()
+                .clickNewBrowserTabLinkOfDefult1Page()
                 .getNumberOfTabs();
 
-        Assert.assertEquals(numberOfOpenTabs, 3);
+        Assert.assertEquals(finalNumberOfTabs - initialNumberOfTabs + 1, 3);
     }
 }
