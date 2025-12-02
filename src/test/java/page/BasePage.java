@@ -21,4 +21,8 @@ public abstract class BasePage {
     protected WebDriver getDriver() {
         return driver;
     }
+
+    public int getNumberOfTabs() {
+        return getDriver().getWindowHandles().size();
+    }
 }

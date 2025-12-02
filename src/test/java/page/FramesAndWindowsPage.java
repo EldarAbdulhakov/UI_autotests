@@ -42,8 +42,4 @@ public class FramesAndWindowsPage extends BasePage {
 
         return new FramesWindowsDefult1Page(getDriver());
     }
-
-    public int getNumberOfTabs() {
-        return getDriver().getWindowHandles().size();
-    }
 }
